@@ -21,17 +21,23 @@
 <body>
     <header>
         <nav>
-            <h2><span class="logo imperial-script-regular"><a href="index.html">Daksh Art Studio</a></span></h2> 
+            <h2><span class="logo imperial-script-regular"><a href="index.html">Daksh Art Studio 🖌️</a></span></h2> 
+            <button class="hamburger imperial-script-regular">☰</button>
             <ul class="imperial-script-regular">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="#home-page">Home</a></li>
+                <li><a href="#about-me">About Me</a></li>
                 <li><a href="my-art.html">My Arts</a></li>
                 <li><a href="contact-me.html">Contact Me</a></li>
             </ul>
             <h2><span class="contact-me imperial-script-regular"><a href="index.html">Contact Us:-1234567890</a></span></h2> 
         </nav>
     </header>
+
+
     <main>
+
+        <!--Home Page-->
+    <section id="home-page" class="home-page">
         <div class="container">
             <div class="cont-1">
                 <span class="imperial-script-regular">
@@ -40,10 +46,50 @@
                     Welcome to my world of colors and imagination."
                 </span>
             </div>
-            <div class="cont">
-                <img src="/assets/images/Anime-1.jpg" width="700px" height="500px">
+            <div class="image-slider">
+                <button id="prevBtn"><</button>
+                <img id="slider-img" src="/assets/images/real-2.jpeg" width="700px" height="600px" style="border:20px solid rgb(0, 0, 0);border-radius: 40px;">
+                <button id="nextBtn">></button>
             </div>
         </div>
+    </section>
+
+
+    <section id="about-me" class="about-me">
+        <div class="container">
+            
+            <!-- Horizontal Layout: About Me Heading & Text -->
+            <div class="about-content imperial-script-regular">
+                <h1 class="about-heading">🎭 About Me 🎨</h1>
+                <p class="about-text">
+                    Hey there! 👋 I'm an artist who lives and breathes creativity.  
+                    From **detailed sketches ✏️** to **vibrant canvas paintings 🖌️**,  
+                    I turn imagination into reality! ✨
+                </p>
+            </div>
+    
+            <!-- Vertical Layout: Skills Section -->
+            <div class="skills-container imperial-script-regular">
+                <div class="skill-card">
+                    <h2>✏️ Sketching</h2>
+                    <p>Creating magic with pencil strokes, bringing raw ideas to life on paper.</p>
+                </div>
+    
+                <div class="skill-card">
+                    <h2>🖌️ Canvas Painting</h2>
+                    <p>Transforming blank spaces into colorful masterpieces full of emotions.</p>
+                </div>
+    
+                <div class="skill-card">
+                    <h2>🎭 Concept Art</h2>
+                    <p>Designing unique characters, worlds, and stories through artistic vision.</p>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+    
     </main>
+    <script src="/assets/js/script.js"></script>
 </body>
 </html>
