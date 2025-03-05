@@ -59,10 +59,13 @@
     
         // Image Slider Functionality
         const images = [
-            '/assets/images/real-2.jpeg',
-            '/assets/images/art2.jpg',  // Add your image paths
-            '/assets/images/art3.jpg',   // Update with actual paths
-            '/assets/images/art4.jpg'
+           
+        "/assets/images/Anime-4.jpg",
+        "/assets/images/real-4.jpeg",
+        "/assets/images/dev-2.jpeg",
+        "/assets/images/Anime-2.jpg",
+        "/assets/images/dev-13.jpeg",
+        "/assets/images/real-1.jpeg",
         ];
     
         let currentIndex = 0;
