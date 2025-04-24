@@ -268,30 +268,109 @@
       font-size: 2.2rem;
       margin-bottom: 1rem;
     }
+/* Mobile Devices - Up to 768px */
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
 
-    @media (max-width: 768px) {
-      .home {
-        flex-direction: column;
-        text-align: center;
-      }
+  .home-page {
+    flex-direction: column;
+  }
 
-      .home-right img {
-        width: 100%;
-      }
+  .home-left h1 {
+    font-size: 2rem;
+  }
 
-      header h1 {
-        font-size: 2rem;
-      }
+  .home-left p {
+    font-size: 1.2rem;
+  }
 
-      nav a {
-        margin: 0 0.5rem;
-      }
-    }
+  .home-right img {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .about img {
+    width: 100px;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+
+  section p {
+    font-size: 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .contact form {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .interact-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Tablets - Up to 1024px */
+@media (max-width: 1024px) {
+  .home-left h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-left p {
+    font-size: 1.4rem;
+  }
+
+  .home-right img {
+    width: 80%;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .slider-container {
+    width: 100%;
+  }
+}
+
+/* Small desktops - Up to 1280px */
+@media (max-width: 1280px) {
+  .home {
+    padding: 3rem 1.5rem;
+  }
+
+  .gallery img {
+    border-radius: 8px;
+  }
+
+  .contact form {
+    max-width: 400px;
+  }
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Daksh Art Studio</h1>
+    <h1 class="logo">Daksh Art Studio</h1>
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
