@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daksh Art Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #000000, #0a0a0a);
+      color: #87CEEB;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      background: #111;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00bfff;
+      font-family: 'Outfit', serif;
+      transition: color 0.3s ease;
+    }
+
+    nav a {
+      margin: 0 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: #87CEEB;
+      transition: width 0.3s;
+      width: 0;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .home {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .home {
+  display: flex; /* Use flexbox to arrange elements side by side */
+  justify-content: space-between; /* Ensure space between text and image */
+  align-items: center; /* Align items vertically centered */
+  padding: 4rem 2rem; /* Padding around the section */
+  max-width: 1200px; /* Ensure the content doesn't stretch too wide */
+  margin: 0 auto; /* Center the section */
+  height: 100vh; /* Full height */
+}
+
+.home-page {
+  display: flex; /* Use flexbox for child elements (text and image) */
+  justify-content: space-between; /* Space between the two child elements */
+  align-items: center; /* Vertically center the content */
+  width: 100%;
+}
+
+.home-left {
+  flex: 1; /* Take up equal space on the left */
+  text-align: left; /* Align text to the left */
+}
+
+.home-left h1 {
+  font-size: 3rem;
+  color: #00bfff; /* Blue color */
+  font-family: 'Outfit', serif; /* Elegant font */
+}
+
+.home-left p {
+  font-size: 1.5rem;
+  color: #cbe8ff; /* Light blue color for the quote */
+  margin-top: 1rem;
+  font-style: italic; /* Italicize the quote */
+}
+
+.home-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-right img {
+  width: 60%; /* Make the image take 60% of the space */
+  border-radius: 15px; /* Rounded corners for the image */
+  transition: transform 0.3s ease; /* Smooth transform on hover */
+}
+
+.home-right img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+.slider-container {
+  width: 80%;
+  height: 100%;
+  position: relative;
+}
+
+.slider-container img {
+  width: 80%;
+  height: auto;
+  border-radius: 15px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+    .about img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      transition: transform 0.5s;
+    }
+
+    .about img:hover {
+      transform: rotate(10deg) scale(1.05);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid #444;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .contact input, .contact textarea {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: #87CEEB;
+    }
+
+    .contact button {
+      background: #87CEEB;
+      color: #000;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact button:hover {
+      background: #00bfff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .interact-button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 2px solid #87CEEB;
+      color: #87CEEB;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .interact-button:hover {
+      background: #87CEEB;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    .highlight {
+      color: #00bfff;
+      font-weight: bold;
+    }
+
+    .gallery-title {
+      color: #00bfff;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      color: #cbe8ff;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    section h2 {
+      color: #a2e3ff;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .home {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .home-right img {
+        width: 100%;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav a {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Daksh Art Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="home">
+    <div class="home-page">
+      <div class="home-left">
+        <h1>Daksh Art Studio</h1>
+        <p>"Where Colors Speak Louder Than Words"</p>
+      </div>
+      <div class="home-right">
+        <div class="slider-container">
+          <img id="slider-image" src="/assets/images/Anime-1.jpg" alt="Artwork Slider" />
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section id="about" class="about">
+    <img src="/assets/images/logo.jpg" alt="Daksh Profile" />
+    <h2>About Me</h2>
+    <p>"Art is not just a craft; it’s an expression of the soul. Welcome to Daksh Art Studio, where I blend creativity, emotion, and technique to create artwork that resonates with you. My journey as an artist has been shaped by constant exploration, pushing boundaries, and embracing new mediums. Every brushstroke is a reflection of my passion for art, and each piece tells a unique story that transcends the ordinary."</p>
+
+       <p> "I believe that art is a form of communication that speaks louder than words. At Daksh Art Studio, I aim to create visual experiences that evoke emotion, provoke thought, and inspire change. With a background in various artistic forms, including digital painting, mixed media, and abstract expressionism, I strive to bring fresh perspectives and new dimensions to the art world."
+        
+        </p>
+    <button class="interact-button">Discover More</button>
+  </section>
+
+  <section id="gallery">
+    <h2 class="gallery-title">Gallery</h2>
+    <p>Here’s a glimpse into my world of imagination and creation. From minimal sketches to vibrant abstracts, each artwork reflects my inner soul and curiosity about life.</p>
+    <div class="gallery">
+      <img src="/assets/images/dev-12.jpeg" alt="Art 1">
+      <img src="/assets/images/dev-7.jpeg" alt="Art 2">
+      <img src="/assets/images/Anime-2.jpg" alt="Art 3">
+      <img src="/assets/images/Anime-3.jpg" alt="Art 4">
+      <img src="/assets/images/real-4.jpeg" alt="Art 4">
+      <img src="/assets/images/dev-2.jpeg" alt="Art 4">
+    </div>
+    <button class="interact-button">Explore Full Collection</button>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <p>If you're interested in my work or want to collaborate, feel free to get in touch. I love connecting with fellow creators, curators, and dreamers.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Daksh Art Studio. All rights reserved.
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
