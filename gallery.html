@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daksh Art Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/images/logo.jpg" type="image/x-icon">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #000000, #0a0a0a);
+      color: #87CEEB;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      background: #111;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00bfff;
+      font-family: 'Outfit', serif;
+      transition: color 0.3s ease;
+    }
+
+    nav a {
+      margin: 0 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: #87CEEB;
+      transition: width 0.3s;
+      width: 0;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .home {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .home {
+  display: flex; /* Use flexbox to arrange elements side by side */
+  justify-content: space-between; /* Ensure space between text and image */
+  align-items: center; /* Align items vertically centered */
+  padding: 4rem 2rem; /* Padding around the section */
+  max-width: 1200px; /* Ensure the content doesn't stretch too wide */
+  margin: 0 auto; /* Center the section */
+  height: 100vh; /* Full height */
+}
+
+.home-page {
+  display: flex; /* Use flexbox for child elements (text and image) */
+  justify-content: space-between; /* Space between the two child elements */
+  align-items: center; /* Vertically center the content */
+  width: 100%;
+}
+
+.home-left {
+  flex: 1; /* Take up equal space on the left */
+  text-align: left; /* Align text to the left */
+}
+
+.home-left h1 {
+  font-size: 3rem;
+  color: #00bfff; /* Blue color */
+  font-family: 'Outfit', serif; /* Elegant font */
+}
+
+.home-left p {
+  font-size: 1.5rem;
+  color: #cbe8ff; /* Light blue color for the quote */
+  margin-top: 1rem;
+  font-style: italic; /* Italicize the quote */
+}
+
+.home-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-right img {
+  width: 60%; /* Make the image take 60% of the space */
+  border-radius: 15px; /* Rounded corners for the image */
+  transition: transform 0.3s ease; /* Smooth transform on hover */
+}
+
+.home-right img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+.slider-container {
+  width: 80%;
+  height: 100%;
+  position: relative;
+}
+
+.slider-container img {
+  width: 80%;
+  height: auto;
+  border-radius: 15px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+    .about img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      transition: transform 0.5s;
+    }
+
+    .about img:hover {
+      transform: rotate(10deg) scale(1.05);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid #444;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .contact input, .contact textarea {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: #87CEEB;
+    }
+
+    .contact button {
+      background: #87CEEB;
+      color: #000;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact button:hover {
+      background: #00bfff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .interact-button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 2px solid #87CEEB;
+      color: #87CEEB;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .interact-button:hover {
+      background: #87CEEB;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    .highlight {
+      color: #00bfff;
+      font-weight: bold;
+    }
+
+    .gallery-title {
+      color: #00bfff;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      color: #cbe8ff;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    section h2 {
+      color: #a2e3ff;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .art-piece {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .art-piece img {
+            max-width: 100%;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+        }
+        .art-info {
+            margin-top: 10px;
+        }
+        .art-title {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .art-price {
+            color: #2c5282;
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+
+/* Mobile Devices - Up to 768px */
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .home-page {
+    flex-direction: column;
+  }
+
+  .home-left h1 {
+    font-size: 2rem;
+  }
+
+  .home-left p {
+    font-size: 1.2rem;
+  }
+
+  .home-right img {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .about img {
+    width: 100px;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+
+  section p {
+    font-size: 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .contact form {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .interact-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Tablets - Up to 1024px */
+@media (max-width: 1024px) {
+  .home-left h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-left p {
+    font-size: 1.4rem;
+  }
+
+  .home-right img {
+    width: 80%;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .slider-container {
+    width: 100%;
+  }
+}
+
+/* Small desktops - Up to 1280px */
+@media (max-width: 1280px) {
+  .home {
+    padding: 3rem 1.5rem;
+  }
+
+  .gallery img {
+    border-radius: 8px;
+  }
+
+  .contact form {
+    max-width: 400px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">Daksh Art Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="gallery">
+    <!-- Example art pieces - Replace src with your actual image paths -->
+    <div class="art-piece">
+        <img src="/assets/images/real-2.jpeg" alt="Abstract Art" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Abstract Dreams</div>
+            <div class="art-price">$599</div>
+        </div>
+    </div>
+    
+    <div class="art-piece">
+        <img src="/assets/images/dev-12.jpeg" alt="Landscape" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Mountain Sunset</div>
+            <div class="art-price">$799</div>
+        </div>
+    </div>
+
+    <div class="art-piece">
+        <img src="/assets/images/Anime-2.jpg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/Anime-3.jpg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/Anime-4.jpg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/real-4.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-12.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-14.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-4.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-7.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-18.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-6.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/real-1.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-8.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-9.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+    <div class="art-piece">
+        <img src="/assets/images/dev-13.jpeg" alt="Portrait" oncontextmenu="return false;">
+        <div class="art-info">
+            <div class="art-title">Urban Life</div>
+            <div class="art-price">$899</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Disable right-click on images
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    });
+</script>
+
+  <footer>
+    &copy; 2025 Daksh Art Studio. All rights reserved.
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
