@@ -19,6 +19,8 @@
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
       height: 100vh;
+      scroll-behavior: smooth;
+      transition: background 0.5s ease;
     }
 
     .reel-container {
@@ -33,7 +35,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #000;
+      background: #050505;
+      transition: transform 0.3s ease-in-out;
     }
 
     video {
@@ -42,9 +45,14 @@
       aspect-ratio: 9 / 16;
       object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
       max-height: 100vh;
       max-width: 100vw;
+      transition: transform 0.3s ease;
+    }
+
+    video:hover {
+      transform: scale(1.02);
     }
 
     .gradient-overlay {
@@ -52,8 +60,9 @@
       bottom: 0;
       width: 100%;
       height: 40%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.2), transparent);
       z-index: 1;
+      pointer-events: none;
     }
 
     .info {
@@ -61,11 +70,18 @@
       bottom: 70px;
       left: 20px;
       z-index: 2;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .caption {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 500;
+      transition: color 0.3s;
     }
 
     .actions {
@@ -85,6 +101,12 @@
       text-align: center;
       cursor: pointer;
       user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.2);
+      color: #ff0055;
     }
 
     .action-btn span {
@@ -97,12 +119,17 @@
       top: 20px;
       right: 20px;
       z-index: 3;
-      background: rgba(0,0,0,0.6);
-      color: white;
+      background: rgba(0, 183, 255, 0.8);
+      color: rgb(255, 255, 255);
       padding: 8px 12px;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 1rem;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .mute-toggle:hover {
+      background: rgba(0, 183, 255, 1);
     }
 
     .nav-mobile, .nav-desktop {
@@ -133,6 +160,13 @@
       text-decoration: none;
       font-size: 1rem;
       font-weight: bold;
+      transition: ease 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #000000;
+      padding: 0% 5px;
+      margin: 5px;
     }
 
     @media (max-width: 768px) {
@@ -151,7 +185,7 @@
 <body>
 
   <div class="nav-mobile">
-    <a class="nav-link" href="index.html">🏠 Home</a>
+    <a class="nav-link" href="index.html">Home</a>
   </div>
 
   <div class="nav-desktop">
@@ -160,12 +194,12 @@
 
   <div class="reel-container">
 
-   <!-- Reel 1 -->
+    <!-- Reel 1 -->
     <div class="reel">
       <video src="assets/videos/reel1.mp4" autoplay loop playsinline></video>
 
       <div class="gradient-overlay"></div>
-        <div class="mute-toggle">🔊</div>
+      <div class="mute-toggle">🔊</div>
 
       <div class="info">
         <p class="caption">🪷|| गणपती बाप्पा मोरया || 🪷<br>
@@ -173,9 +207,6 @@
          Artist - @daksh_7.0<br>
          .<br>
          Artpage - @dakshart_studio<br>
-         .<br>
-         .<br>
-         #art #ganpati #bappa #music #mumbai #navimumbai<br> #artwork #instagram #trending #trendingreels<br> #artist #bappamorya #lalbaughcharaja #bappamajha<br> #india #photography #painting #reels #instamood #instadaily
         </p>
       </div>
 
@@ -184,7 +215,6 @@
         <div class="action-btn">💬<br><span>589</span></div>
       </div>
     </div>
-
 
     <!-- Reel 2 -->
     <div class="reel">
@@ -235,7 +265,6 @@
       prev?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Mute/unmute toggle + auto pause other videos + preload next
     const reels = document.querySelectorAll(".reel");
 
     const observer = new IntersectionObserver((entries) => {
