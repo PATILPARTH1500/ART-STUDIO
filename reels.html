@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reel Viewer</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     * {
       margin: 0;
@@ -12,20 +12,24 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #000;
       color: #fff;
       font-family: sans-serif;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      height: 100vh;
-      scroll-behavior: smooth;
+      overflow: hidden;
       transition: background 0.5s ease;
     }
 
     .reel-container {
-      display: flex;
-      flex-direction: column;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     .reel {
@@ -36,7 +40,6 @@
       justify-content: center;
       align-items: center;
       background: #050505;
-      transition: transform 0.3s ease-in-out;
     }
 
     video {
@@ -74,14 +77,19 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .caption {
       font-size: 1.2rem;
       font-weight: 500;
-      transition: color 0.3s;
     }
 
     .actions {
@@ -120,7 +128,7 @@
       right: 20px;
       z-index: 3;
       background: rgba(0, 183, 255, 0.8);
-      color: rgb(255, 255, 255);
+      color: white;
       padding: 8px 12px;
       border-radius: 8px;
       font-size: 1rem;
@@ -132,7 +140,8 @@
       background: rgba(0, 183, 255, 1);
     }
 
-    .nav-mobile, .nav-desktop {
+    .nav-mobile,
+    .nav-desktop {
       position: fixed;
       z-index: 4;
     }
@@ -156,7 +165,7 @@
     }
 
     .nav-link {
-      color: rgb(0, 0, 0);
+      color: black;
       text-decoration: none;
       font-size: 1rem;
       font-weight: bold;
@@ -164,7 +173,7 @@
     }
 
     .nav-link:hover {
-      color: #000000;
+      color: black;
       padding: 0% 5px;
       margin: 5px;
     }
@@ -183,7 +192,6 @@
   </style>
 </head>
 <body>
-
   <div class="nav-mobile">
     <a class="nav-link" href="index.html">Home</a>
   </div>
@@ -193,90 +201,40 @@
   </div>
 
   <div class="reel-container">
-
-    <!-- Reel 1 -->
     <div class="reel">
-      <video src="assets/videos/reel1.mp4" autoplay loop playsinline></video>
-
+      <video src="assets/videos/reel1.mp4" autoplay loop muted playsinline></video>
       <div class="gradient-overlay"></div>
-      <div class="mute-toggle">🔊</div>
-
+      <div class="mute-toggle">🔇</div>
       <div class="info">
-        <p class="caption">🪷|| गणपती बाप्पा मोरया || 🪷<br>
-         .<br>
-         Artist - @daksh_7.0<br>
-         .<br>
-         Artpage - @dakshart_studio<br>
-        </p>
+        <p class="caption">🪷|| गणपती बाप्पा मोरया || 🪷<br>.<br>Artist - @daksh_7.0<br>.<br>Artpage - @dakshart_studio</p>
       </div>
-
       <div class="actions">
         <div class="action-btn">❤️<br><span>12.3K</span></div>
         <div class="action-btn">💬<br><span>589</span></div>
       </div>
     </div>
 
-    <!-- Reel 2 -->
     <div class="reel">
-      <video src="videos/reel2.mp4" autoplay loop playsinline></video>
-
+      <video src="assets/videos/reel2.mp4" autoplay loop muted playsinline></video>
       <div class="gradient-overlay"></div>
-      <div class="mute-toggle">🔊</div>
-
+      <div class="mute-toggle">🔇</div>
       <div class="info">
         <p class="caption">Leg day never skips 💪</p>
       </div>
-
       <div class="actions">
         <div class="action-btn">❤️<br><span>9.1K</span></div>
         <div class="action-btn">💬<br><span>422</span></div>
       </div>
     </div>
-
   </div>
 
   <script>
-    let startY = 0;
-
-    window.addEventListener("touchstart", (e) => {
-      startY = e.touches[0].clientY;
-    });
-
-    window.addEventListener("touchend", (e) => {
-      const endY = e.changedTouches[0].clientY;
-      const deltaY = startY - endY;
-
-      if (Math.abs(deltaY) > 50) {
-        if (deltaY > 0) {
-          scrollToNextReel();
-        } else {
-          scrollToPrevReel();
-        }
-      }
-    });
-
-    function scrollToNextReel() {
-      const next = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2 + 10);
-      next?.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function scrollToPrevReel() {
-      const prev = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2 - 10);
-      prev?.scrollIntoView({ behavior: 'smooth' });
-    }
-
     const reels = document.querySelectorAll(".reel");
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target.querySelector("video");
         if (entry.isIntersecting) {
           video.play();
-
-          const nextReel = entry.target.nextElementSibling;
-          if (nextReel && nextReel.querySelector("video")) {
-            nextReel.querySelector("video").load();
-          }
         } else {
           video.pause();
         }
@@ -286,13 +244,14 @@
     reels.forEach(reel => {
       const video = reel.querySelector("video");
       const toggle = reel.querySelector(".mute-toggle");
+      video.muted = true;
+      toggle.textContent = "🔇";
 
       toggle.addEventListener("click", () => {
         video.muted = !video.muted;
         toggle.textContent = video.muted ? "🔇" : "🔊";
       });
 
-      video.muted = false;
       observer.observe(reel);
     });
   </script>
