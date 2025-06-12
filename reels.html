@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reel Viewer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: sans-serif;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+    }
+
+    .reel-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reel {
+      position: relative;
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+
+    video {
+      width: auto;
+      height: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      max-height: 100vh;
+      max-width: 100vw;
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      z-index: 1;
+    }
+
+    .info {
+      position: absolute;
+      bottom: 70px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    .caption {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .actions {
+      position: absolute;
+      bottom: 70px;
+      right: 20px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+
+    .action-btn {
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .action-btn span {
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .mute-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .nav-mobile, .nav-desktop {
+      position: fixed;
+      z-index: 4;
+    }
+
+    .nav-mobile {
+      bottom: 0;
+      width: 100%;
+      background: rgba(15, 255, 219, 0.8);
+      text-align: center;
+      padding: 10px 0;
+      display: none;
+    }
+
+    .nav-desktop {
+      top: 20px;
+      left: 20px;
+      background: #00bfff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .nav-link {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .nav-mobile {
+        display: block;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nav-desktop {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-mobile">
+    <a class="nav-link" href="index.html">🏠 Home</a>
+  </div>
+
+  <div class="nav-desktop">
+    <a class="nav-link" href="index.html">← Back to Home</a>
+  </div>
+
+  <div class="reel-container">
+
+   <!-- Reel 1 -->
+    <div class="reel">
+      <video src="assets/videos/reel1.mp4" autoplay loop playsinline></video>
+
+      <div class="gradient-overlay"></div>
+        <div class="mute-toggle">🔊</div>
+
+      <div class="info">
+        <p class="caption">🪷|| गणपती बाप्पा मोरया || 🪷<br>
+         .<br>
+         Artist - @daksh_7.0<br>
+         .<br>
+         Artpage - @dakshart_studio<br>
+         .<br>
+         .<br>
+         #art #ganpati #bappa #music #mumbai #navimumbai<br> #artwork #instagram #trending #trendingreels<br> #artist #bappamorya #lalbaughcharaja #bappamajha<br> #india #photography #painting #reels #instamood #instadaily
+        </p>
+      </div>
+
+      <div class="actions">
+        <div class="action-btn">❤️<br><span>12.3K</span></div>
+        <div class="action-btn">💬<br><span>589</span></div>
+      </div>
+    </div>
+
+
+    <!-- Reel 2 -->
+    <div class="reel">
+      <video src="videos/reel2.mp4" autoplay loop playsinline></video>
+
+      <div class="gradient-overlay"></div>
+      <div class="mute-toggle">🔊</div>
+
+      <div class="info">
+        <p class="caption">Leg day never skips 💪</p>
+      </div>
+
+      <div class="actions">
+        <div class="action-btn">❤️<br><span>9.1K</span></div>
+        <div class="action-btn">💬<br><span>422</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let startY = 0;
+
+    window.addEventListener("touchstart", (e) => {
+      startY = e.touches[0].clientY;
+    });
+
+    window.addEventListener("touchend", (e) => {
+      const endY = e.changedTouches[0].clientY;
+      const deltaY = startY - endY;
+
+      if (Math.abs(deltaY) > 50) {
+        if (deltaY > 0) {
+          scrollToNextReel();
+        } else {
+          scrollToPrevReel();
+        }
+      }
+    });
+
+    function scrollToNextReel() {
+      const next = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2 + 10);
+      next?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToPrevReel() {
+      const prev = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2 - 10);
+      prev?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Mute/unmute toggle + auto pause other videos + preload next
+    const reels = document.querySelectorAll(".reel");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector("video");
+        if (entry.isIntersecting) {
+          video.play();
+
+          const nextReel = entry.target.nextElementSibling;
+          if (nextReel && nextReel.querySelector("video")) {
+            nextReel.querySelector("video").load();
+          }
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.75 });
+
+    reels.forEach(reel => {
+      const video = reel.querySelector("video");
+      const toggle = reel.querySelector(".mute-toggle");
+
+      toggle.addEventListener("click", () => {
+        video.muted = !video.muted;
+        toggle.textContent = video.muted ? "🔇" : "🔊";
+      });
+
+      video.muted = false;
+      observer.observe(reel);
+    });
+  </script>
+</body>
+</html>
